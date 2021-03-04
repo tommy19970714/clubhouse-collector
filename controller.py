@@ -234,7 +234,7 @@ def chat_main(client):
     while True:
         print_channel_list(client, max_limit)
         channels = client.get_channels()['channels']
-        channels = list(filter(is_japanese, channels))[:3]
+        channels = list(filter(is_japanese, channels))[:30]
         for channel in channels:
             channel_name = channel['channel']
             if channel_name in rooms:
