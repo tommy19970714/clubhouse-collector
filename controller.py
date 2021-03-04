@@ -17,6 +17,7 @@ from clubhouse.clubhouse import Clubhouse
 import agorartc
 import time
 from subprocess import Popen
+import re
 
 # Set some global variables
 try:
@@ -222,12 +223,18 @@ def chat_main(client):
                 return False
         return True
 
+    def is_japanese(channel):
+        topic = str(channel['topic'])
+        non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), '')
+        topic = topic.translate(non_bmp_map)
+        return True if re.search(r'[ぁ-んァ-ン]', topic) else False
+
     user_id = client.HEADERS.get("CH-UserID")
     rooms = []
     while True:
         print_channel_list(client, max_limit)
-        channels = client.get_channels()['channels'][:100]
-        print(channels)
+        channels = client.get_channels()['channels']
+        channels = list(filter(is_japanese, channels))[:3]
         for channel in channels:
             channel_name = channel['channel']
             if channel_name in rooms:
