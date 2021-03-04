@@ -331,11 +331,11 @@ def main():
 
 
 if __name__ == "__main__":
-    # try:
-    main()
-    # except Exception:
-    #     # Remove dump files on exit.
-    #     file_list = os.listdir(".")
-    #     for _file in file_list:
-    #         if _file.endswith(".dmp"):
-    #             os.remove(_file)
+    try:
+        main()
+    except Exception:
+        # Remove dump files on exit.
+        file_list = os.listdir(".")
+        for _file in file_list:
+            if _file.endswith(".dmp"):
+                os.remove(_file)
