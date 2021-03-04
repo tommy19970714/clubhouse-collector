@@ -226,7 +226,7 @@ def chat_main(client):
     rooms = []
     while True:
         print_channel_list(client, max_limit)
-        channels = client.get_channels()['channels'][:5]
+        channels = client.get_channels()['channels'][:100]
         print(channels)
         for channel in channels:
             channel_name = channel['channel']
@@ -237,7 +237,7 @@ def chat_main(client):
             proc = Popen('python3 cli.py {}'.format(channel_name), shell=True)
             print("process id = %s" % proc.pid)
             time.sleep(5)
-        time.sleep(100)
+        time.sleep(3600)
 
 
 def user_authentication(client):
